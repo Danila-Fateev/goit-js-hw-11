@@ -1,2 +1,0 @@
-const e={searchBtn:document.querySelector("#search-btn"),loadBtn:document.querySelector(".load-more"),searchForm:document.querySelector("#search-form"),inputForm:document.querySelector("input-form")};let t=0;e.searchForm.addEventListener("submit",(e=>e.preventDefault())),e.searchBtn.addEventListener("click",(r=>{t=1;const o=e.inputForm.value;fetch(`https://pixabay.com/api/?key=27675022-eae91b965f306fbe1611b8e88&q=${o}&image_type=photo`)}));
-//# sourceMappingURL=index.9a6dfb35.js.map
