@@ -15,7 +15,7 @@ refs.searchBtn.addEventListener('click', (e) => {
     fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${inputValue}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=40`)
         .then((r) => {return r.json()})
         .then((r) => {
-            r.map((el) => {
+            r.hits.map((el) => {
                 return `<div class="photo-card">
   <img src="${el.webformatURL}" alt="" loading="lazy" />
   <div class="info">
