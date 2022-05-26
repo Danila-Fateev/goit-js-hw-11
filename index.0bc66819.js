@@ -1,0 +1,2 @@
+var API_KEY="27675022-eae91b965f306fbe1611b8e88",refs={searchBtn:document.querySelector("#search-btn"),loadBtn:document.querySelector(".load-more"),searchForm:document.querySelector("#search-form"),inputForm:document.querySelector("input-form")},page=0;refs.searchForm.addEventListener("submit",(function(e){return e.preventDefault()})),refs.searchBtn.addEventListener("click",(function(e){page=1;var r=refs.inputForm.value;fetch("https://pixabay.com/api/?key=".concat(API_KEY,"&q=").concat(r,"&image_type=photo"))}));
+//# sourceMappingURL=index.0bc66819.js.map
