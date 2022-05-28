@@ -40,3 +40,15 @@ img {
 .image-box {
     height: 200px;
 }
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(0, 102, 255);
+    padding-top: 20px;
+    padding-bottom: 5px;
+}
+
+.input-form{
+    margin-right: 10px;
+}

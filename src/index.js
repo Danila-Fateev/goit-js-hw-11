@@ -7,19 +7,18 @@ const refs = {
   galleryEl: document.querySelector('.gallery'),
 }
 
-let max = 0;
 let page = 0;
-
 
 refs.searchForm.addEventListener('submit', (e) => e.preventDefault());
 refs.searchBtn.addEventListener('click', onSearchBtnClick )
 
-  function onSearchBtnClick() {
-  max += 1
-  console.log(max)
+function onSearchBtnClick() {
+  refs.galleryEl.innerHTML = "";
 
     page = 1;
     const inputValue = refs.inputForm.value;
+    refs.searchBtn.textContent = 'Searching...';
+    refs.searchBtn.setAttribute('disabled', 'disabled')
     fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${inputValue}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=40`)
       .then((r) => {
         if (r.status !== 200) {
@@ -55,4 +54,9 @@ refs.searchBtn.addEventListener('click', onSearchBtnClick )
       })
       .then((r) => refs.galleryEl.insertAdjacentHTML('beforeend', r))
       .catch(console.log)
+      .finally((r) => {
+                  refs.searchBtn.textContent = 'Search',
+          refs.searchBtn.removeAttribute('disabled')
+      }
+    )
 }
