@@ -8,6 +8,7 @@ const refs = {
     searchForm: document.querySelector('#search-form'),
   inputForm: document.querySelector('.input-form'),
   galleryEl: document.querySelector('.gallery'),
+  outOfPhotosEl: document.querySelector('.out-of-photos'),
 }
 
 let page = 0;
@@ -18,6 +19,7 @@ refs.searchBtn.addEventListener('click', onSearchBtnClick )
 refs.loadBtn.addEventListener('click', onLoadMoreBtnClick)
 
 function onSearchBtnClick() {
+  refs.outOfPhotosEl.style.display = 'none';
   refs.galleryEl.innerHTML = "";
   refs.loadBtn.style.display = 'none';
     page = 1;
@@ -70,11 +72,15 @@ function onSearchBtnClick() {
 }
 
 async function onLoadMoreBtnClick() {
-  refs.searchBtn.textContent = 'Loading...';
-  refs.searchBtn.setAttribute('disabled', 'disabled')
+  refs.loadBtn.textContent = 'Loading...';
+  refs.loadBtn.setAttribute('disabled', 'disabled')
   page += 1
   const fetchResult = await fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${inputValue}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=40`);
   const results = await fetchResult.json();
+  if (results.hits.length === 0) {
+    refs.outOfPhotosEl.style.display = 'block';
+    refs.loadBtn.style.display = 'none';
+  }
   const htmlParsed = await results.hits.map((el) => {
     return `<div class="photo-card">
               <div class="image-box">
