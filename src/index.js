@@ -8,15 +8,17 @@ const refs = {
 }
 
 let page = 0;
+let inputValue = null;
 
 refs.searchForm.addEventListener('submit', (e) => e.preventDefault());
 refs.searchBtn.addEventListener('click', onSearchBtnClick )
+refs.loadBtn.addEventListener('click', onLoadMoreBtnClick)
 
 function onSearchBtnClick() {
   refs.galleryEl.innerHTML = "";
 
     page = 1;
-    const inputValue = refs.inputForm.value;
+    inputValue = refs.inputForm.value;
     refs.searchBtn.textContent = 'Searching...';
     refs.searchBtn.setAttribute('disabled', 'disabled')
     fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${inputValue}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=40`)
@@ -52,11 +54,48 @@ function onSearchBtnClick() {
 </div>`
            }).join("")
       })
-      .then((r) => refs.galleryEl.insertAdjacentHTML('beforeend', r))
+      .then((r) => {
+        refs.galleryEl.insertAdjacentHTML('beforeend', r)
+        refs.loadBtn.style.display = 'block';
+      })
       .catch(console.log)
       .finally((r) => {
                   refs.searchBtn.textContent = 'Search',
           refs.searchBtn.removeAttribute('disabled')
       }
     )
+}
+
+async function onLoadMoreBtnClick() {
+  refs.searchBtn.textContent = 'Loading...';
+  refs.searchBtn.setAttribute('disabled', 'disabled')
+  page += 1
+  const fetchResult = await fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${inputValue}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=40`);
+  const results = await fetchResult.json();
+  const htmlParsed = await results.hits.map((el) => {
+    return `<div class="photo-card">
+              <div class="image-box">
+  <img src="${el.webformatURL}" alt="${el.tags}" class="card-image" loading="lazy" />
+  </div>
+  <div class="info">
+    <p class="info-item">
+      <b>Likes</b><br>${el.likes}
+    </p>
+    <p class="info-item">
+      <b>Views</b><br>${el.views}
+    </p>
+    <p class="info-item">
+      <b>Comments</b><br>${el.comments}
+    </p>
+    <p class="info-item">
+      <b>Downloads</b><br>${el.downloads}
+    </p>
+  </div>
+</div>`
+  }).join('');
+
+  await refs.galleryEl.insertAdjacentHTML('beforeend', htmlParsed);
+
+    refs.searchBtn.textContent = 'Load more';
+  refs.searchBtn.removeAttribute('disabled');
 }
