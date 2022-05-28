@@ -99,6 +99,6 @@ async function onLoadMoreBtnClick() {
 
   await refs.galleryEl.insertAdjacentHTML('beforeend', htmlParsed);
 
-    refs.searchBtn.textContent = 'Load more';
-  refs.searchBtn.removeAttribute('disabled');
+    refs.loadBtn.textContent = 'Load more';
+  refs.loadBtn.removeAttribute('disabled');
 }
