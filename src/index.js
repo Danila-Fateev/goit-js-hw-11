@@ -16,7 +16,7 @@ refs.loadBtn.addEventListener('click', onLoadMoreBtnClick)
 
 function onSearchBtnClick() {
   refs.galleryEl.innerHTML = "";
-
+  refs.loadBtn.style.display = 'none';
     page = 1;
     inputValue = refs.inputForm.value;
     refs.searchBtn.textContent = 'Searching...';
