@@ -22,17 +22,18 @@ img {
 }
 
 .gallery {
+    margin-top: 30px;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .photo-card {
     width: (23%);
     height: auto;
     overflow: hidden;
-
+    margin-left: 10px;
     margin-bottom: 30px;
 }
 

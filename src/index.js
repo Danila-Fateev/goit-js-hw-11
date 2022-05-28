@@ -4,23 +4,33 @@ const refs = {
     loadBtn: document.querySelector('.load-more'),
     searchForm: document.querySelector('#search-form'),
   inputForm: document.querySelector('.input-form'),
-  galleryEl: document.querySelector('.gallery')
+  galleryEl: document.querySelector('.gallery'),
 }
+
+let max = 0;
 
 let page = 0;
 
 refs.searchForm.addEventListener('submit', (e) => e.preventDefault());
-refs.searchBtn.addEventListener('click', (e) => {
+refs.searchBtn.addEventListener('click', onSearchBtnClick )
+
+  function onSearchBtnClick() {
+  max += 1    
+  console.log(max)
+
     page = 1;
     const inputValue = refs.inputForm.value;
     fetch(`https://pixabay.com/api/?key=${API_KEY}&q=${inputValue}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=40`)
       .then((r) => {
-        if (r.status === 200) {
-          refs.loadBtn.style.display = 'block';
+        if (r.status !== 200) {
+          throw new Error
         }
         return r.json()
       })
-        .then((r) => {
+      .then((r) => {
+        if (r.hits.length === 0) {
+          throw new Error
+          }
            return r.hits.map((el) => {
              return `<div class="photo-card">
               <div class="image-box">
@@ -42,6 +52,5 @@ refs.searchBtn.addEventListener('click', (e) => {
   </div>
 </div>`
             }).join("")
-    }).then((r) => refs.galleryEl.insertAdjacentHTML('beforeend', r))
-})
-
+    }).then((r) => refs.galleryEl.insertAdjacentHTML('beforeend', r)).catch(console.log)
+}
