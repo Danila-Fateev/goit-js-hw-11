@@ -3,7 +3,11 @@
 
 img {
     width: 100%;
-    height: auto;
+    height: 100%;
+
+}
+
+.card-image{
     object-fit: cover;
     object-position: center;
 }
@@ -28,5 +32,10 @@ img {
     width: (23%);
     height: auto;
     overflow: hidden;
+
     margin-bottom: 30px;
+}
+
+.image-box {
+    height: 200px;
 }

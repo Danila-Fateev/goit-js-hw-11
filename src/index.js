@@ -22,8 +22,10 @@ refs.searchBtn.addEventListener('click', (e) => {
       })
         .then((r) => {
            return r.hits.map((el) => {
-              return `<div class="photo-card">
-  <img src="${el.webformatURL}" alt="${el.tags}" loading="lazy" />
+             return `<div class="photo-card">
+              <div class="image-box">
+  <img src="${el.webformatURL}" alt="${el.tags}" class="card-image" loading="lazy" />
+  </div>
   <div class="info">
     <p class="info-item">
       <b>Likes</b><br>${el.likes}
