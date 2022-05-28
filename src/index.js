@@ -1,3 +1,6 @@
+import Notiflix from 'notiflix';
+
+
 const API_KEY = '27675022-eae91b965f306fbe1611b8e88';
 const refs = {
     searchBtn: document.querySelector('#search-btn'),
@@ -58,7 +61,7 @@ function onSearchBtnClick() {
         refs.galleryEl.insertAdjacentHTML('beforeend', r)
         refs.loadBtn.style.display = 'block';
       })
-      .catch(console.log)
+      .catch((r) => Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again."))
       .finally((r) => {
                   refs.searchBtn.textContent = 'Search',
           refs.searchBtn.removeAttribute('disabled')
