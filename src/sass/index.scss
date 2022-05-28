@@ -1,7 +1,32 @@
 @import './common';
 @import './example';
 
+img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+}
 
 .load-more {
     display: none;
+}
+
+.info {
+    display: flex;
+    justify-content: space-around;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-around;
+}
+
+.photo-card {
+    width: (23%);
+    height: auto;
+    overflow: hidden;
+    margin-bottom: 30px;
 }

@@ -43,4 +43,3 @@ refs.searchBtn.addEventListener('click', (e) => {
     }).then((r) => refs.galleryEl.insertAdjacentHTML('beforeend', r))
 })
 
-// refs.loadBtn.style.display = 'block';
