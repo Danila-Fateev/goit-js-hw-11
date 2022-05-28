@@ -8,14 +8,14 @@ const refs = {
 }
 
 let max = 0;
-
 let page = 0;
+
 
 refs.searchForm.addEventListener('submit', (e) => e.preventDefault());
 refs.searchBtn.addEventListener('click', onSearchBtnClick )
 
   function onSearchBtnClick() {
-  max += 1    
+  max += 1
   console.log(max)
 
     page = 1;
@@ -51,6 +51,8 @@ refs.searchBtn.addEventListener('click', onSearchBtnClick )
     </p>
   </div>
 </div>`
-            }).join("")
-    }).then((r) => refs.galleryEl.insertAdjacentHTML('beforeend', r)).catch(console.log)
+           }).join("")
+      })
+      .then((r) => refs.galleryEl.insertAdjacentHTML('beforeend', r))
+      .catch(console.log)
 }
